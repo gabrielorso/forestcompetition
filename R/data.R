@@ -2,7 +2,7 @@
 #'
 #' Um dataset contendo exemplo de remedição de parcela de floresta nativa no Sul do Brasil
 #'
-#' @format A data frame with 63 rows and 21 variables:
+#' @format Um data frame com 63 linhas e 21 variáveis:
 #' \describe{
 #'   \item{bloco}{O bloco ou nome da parcela}
 #'   \item{faixa}{Subdivisão do bloco em faixas}

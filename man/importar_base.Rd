@@ -14,8 +14,11 @@ importar_base(arq, col = "standard", re = TRUE)
 \item{re}{TRUE/FALSE que indica que o arquivo importado é de uma remedição. Caso contrário, é a primeira medição. Padrão é TRUE para remedição.}
 }
 \value{
-Um tibble
+Um tibble com o banco de dados formatado da forma apropriada. Veja os datasets \code{data(medicao)} e \code{data(remedicao)}.
 }
 \description{
 Importar base de dados
+}
+\details{
+O arquivo a ser importado deve obrigatoriamente conter as colunas \strong{bloco}, \strong{cap}, \strong{ind} para o caso de primeira medição. Quando for remedição, acrescentam-se as colunas \strong{ind_ant} e \strong{cap_ant} como obrigatórias. Um exemplo de um banco de dados adequado para medição e remedição pode ser visualizado consultando \code{head(medicao)} e \code{head(remedicao)}
 }
