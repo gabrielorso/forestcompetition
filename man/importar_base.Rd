@@ -4,12 +4,12 @@
 \alias{importar_base}
 \title{Importar base de dados}
 \usage{
-importar_base(arq, col, re = TRUE)
+importar_base(arq, col = "standard", re = TRUE)
 }
 \arguments{
 \item{arq}{Um vetor caractere de um elemento, com o caminho absoluto ou relativo do arquivo em formto .csv que será importado. O arquivo deve ter separador ';' e marcador de decimal ','.}
 
-\item{col}{Um vetor caractere de um elemento com os códigos dos tipos das colunas similar ao argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas.}
+\item{col}{Um vetor caractere de um elemento com os códigos dos tipos das colunas similar ao argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas. Por padrão vale 'cciicnncccccccccciinn' para remedições e 'ccicnnccccccccciinn' para primeira medição}
 
 \item{re}{TRUE/FALSE que indica que o arquivo importado é de uma remedição. Caso contrário, é a primeira medição. Padrão é TRUE para remedição.}
 }

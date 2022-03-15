@@ -1,19 +1,23 @@
+bloco <- cap <- cap_ant <- faixa <- ind <- bif <- ind_ant <- NULL
+
 
 #' Importar base de dados
 #'
 #' @param arq Um vetor caractere de um elemento, com o caminho absoluto ou relativo do arquivo em formto .csv que será importado. O arquivo deve ter separador ';' e marcador de decimal ','.
-#' @param col Um vetor caractere de um elemento com os códigos dos tipos das colunas similar ao argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas.
+#' @param col Um vetor caractere de um elemento com os códigos dos tipos das colunas similar ao argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas. Por padrão vale 'cciicnncccccccccciinn' para remedições e 'ccicnnccccccccciinn' para primeira medição
 #' @param re  TRUE/FALSE que indica que o arquivo importado é de uma remedição. Caso contrário, é a primeira medição. Padrão é TRUE para remedição.
 #'
 #' @return Um tibble
 #' @export
-#'
-#' @examples
-importar_base <- function(arq, col, re = TRUE) {
+importar_base <- function(arq, col = 'standard', re = TRUE) {
+    if(col == 'standard') {
+        if(re == TRUE) {coluna <-'cciicnncccccccccciinn'} else {coluna <- 'ccicnnccccccccciinn'}
+    } else {coluna <- col}
+
     if(re == TRUE) {
         df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,  # Elimina linhas em branco
-                        col_types = col) %>% dplyr::filter(!is.na(bloco)) %>%  # Também elimina linhas em branco
+                        col_types = coluna) %>% dplyr::filter(!is.na(bloco)) %>%  # Também elimina linhas em branco
             dplyr::mutate(cap = ifelse(cap == '-', '0',  # Troca mortas por 0
                                 ifelse(cap == 'NE', '1',  # Troca Não encontradas por 1
                                        ifelse(cap == 'NM', '2', cap))),  # Troca não medidas por 2
@@ -33,7 +37,7 @@ importar_base <- function(arq, col, re = TRUE) {
     } else {
         df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,
-                        col_types = col) %>% dplyr::filter(!is.na(bloco)) %>%
+                        col_types = coluna) %>% dplyr::filter(!is.na(bloco)) %>%
             dplyr::mutate(cap = ifelse(cap == '-', '0',
                                 ifelse(cap == 'NE', '1',
                                        ifelse(cap == 'NM', '2', cap))),
