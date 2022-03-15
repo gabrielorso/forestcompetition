@@ -9,7 +9,6 @@
 #' @export
 #'
 #' @examples
-#' base <- importar_base(arq = 'dados.csv', col = 'ccnnccnnniinc', re = TRUE)
 importar_base <- function(arq, col, re = TRUE) {
     if(re == TRUE) {
         df <- readr::read_csv2(arq,

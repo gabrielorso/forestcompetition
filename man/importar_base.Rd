@@ -19,6 +19,3 @@ Um tibble
 \description{
 Importar base de dados
 }
-\examples{
-base <- importar_base(arq = 'dados.csv', col = 'ccnnccnnniinc', re = TRUE)
-}
