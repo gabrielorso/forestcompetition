@@ -1,14 +1,21 @@
 
+#' Importar base de dados
+#'
+#' @param arq Um vetor caractere de um elemento, com o caminho absoluto ou relativo do arquivo em formto .csv que será importado. O arquivo deve ter separador ';' e marcador de decimal ','.
+#' @param col Um vetor caractere de um elemento com os códigos dos tipos das colunas similar ao argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas.
+#' @param re  TRUE/FALSE que indica que o arquivo importado é de uma remedição. Caso contrário, é a primeira medição. Padrão é TRUE para remedição.
+#'
+#' @return Um tibble
+#' @export
+#'
+#' @examples
+#' base <- importar_base(arq = 'dados.csv', col = 'ccnnccnnniinc', re = TRUE)
 importar_base <- function(arq, col, re = TRUE) {
-    # arq é um caractere com o caminho absoluto ou relativo da base de dados a ser importada
-    # col é um caractere para o argumento col_type das funções do pacote readr. Define a tipagem das colunas importadas
-    # re indica que é remedição. Caso contrário, é a primeira medição. Padrão é remedição
-
     if(re == TRUE) {
-        df <- read_csv2(arq,
+        df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,  # Elimina linhas em branco
-                        col_types = col) %>% filter(!is.na(bloco)) %>%  # Também elimina linhas em branco
-            mutate(cap = ifelse(cap == '-', '0',  # Troca mortas por 0
+                        col_types = col) %>% dplyr::filter(!is.na(bloco)) %>%  # Também elimina linhas em branco
+            dplyr::mutate(cap = ifelse(cap == '-', '0',  # Troca mortas por 0
                                 ifelse(cap == 'NE', '1',  # Troca Não encontradas por 1
                                        ifelse(cap == 'NM', '2', cap))),  # Troca não medidas por 2
                    cap_ant = ifelse(cap_ant == '-', '0',  # Mesma coisa para o cap anterior
@@ -25,10 +32,10 @@ importar_base <- function(arq, col, re = TRUE) {
         df$cap <- as.numeric(gsub(',', '.', df$cap))
         df$cap_ant <- as.numeric(gsub(',', '.', df$cap_ant))
     } else {
-        df <- read_csv2(arq,
+        df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,
-                        col_types = col) %>% filter(!is.na(bloco)) %>%
-            mutate(cap = ifelse(cap == '-', '0',
+                        col_types = col) %>% dplyr::filter(!is.na(bloco)) %>%
+            dplyr::mutate(cap = ifelse(cap == '-', '0',
                                 ifelse(cap == 'NE', '1',
                                        ifelse(cap == 'NM', '2', cap))),
                    id = paste0(bloco, '.', faixa, '/', ind, bif))
