@@ -2,5 +2,6 @@
 
 export("%>%")
 export(importar_base)
+export(juncao_composta)
 export(juntar_medicoes)
 importFrom(magrittr,"%>%")
