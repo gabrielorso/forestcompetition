@@ -1,4 +1,4 @@
-dados <- vizinhas <- NULL
+vizinhas <- NULL
 
 # Função para contabilizar o número de vizinhas de mesma espécie, desconsiderando as bifurcações, quando presentes.
 
@@ -6,6 +6,7 @@ dados <- vizinhas <- NULL
 #'
 #' Conta o número de árvores da mesma espécie dentre as `n` vizinhas mais próximas .
 #'
+#' @param df data.frame do banco de dados utilizado
 #' @param alvo índice da árvore alvo dentro do banco de dados
 #' @param n.vizinhas vetor numérico de um elemento, com o número de árvores vizinhas consideradas.
 #' @param bif TRUE/FALSE que indica se as bifurcações serão levadas em conta. Padrão é FALSE
@@ -17,8 +18,9 @@ dados <- vizinhas <- NULL
 #'
 #' @export
 #'
-vizinhas_iguais <- function(alvo, n.vizinhas, bif = FALSE, simplify = TRUE) {
+vizinhas_iguais <- function(df, alvo, n.vizinhas, bif = FALSE, simplify = TRUE) {
 
+    dados <- df
     #Árvore alvo
     id_alvo <- as.character(dados$id[alvo])
     nome_alvo <- as.character(dados$cient21[alvo])
@@ -43,5 +45,6 @@ vizinhas_iguais <- function(alvo, n.vizinhas, bif = FALSE, simplify = TRUE) {
     } else {
         return(nome_vizinhas)
     }
+
 }
 

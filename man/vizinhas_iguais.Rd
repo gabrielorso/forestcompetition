@@ -4,9 +4,11 @@
 \alias{vizinhas_iguais}
 \title{Cálculo de árvores vizinhas da mesma espécie}
 \usage{
-vizinhas_iguais(alvo, n.vizinhas, bif = FALSE, simplify = TRUE)
+vizinhas_iguais(df, alvo, n.vizinhas, bif = FALSE, simplify = TRUE)
 }
 \arguments{
+\item{df}{data.frame do banco de dados utilizado}
+
 \item{alvo}{índice da árvore alvo dentro do banco de dados}
 
 \item{n.vizinhas}{vetor numérico de um elemento, com o número de árvores vizinhas consideradas.}
