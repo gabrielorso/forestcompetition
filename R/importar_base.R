@@ -1,4 +1,4 @@
-bloco <- cap <- cap_ant <- faixa <- ind <- bif <- ind_ant <- NULL
+# bloco <- cap <- cap_ant <- faixa <- ind <- bif <- ind_ant <- NULL
 
 
 #' Importar base de dados
@@ -12,6 +12,7 @@ bloco <- cap <- cap_ant <- faixa <- ind <- bif <- ind_ant <- NULL
 #' @return Um tibble com o banco de dados formatado da forma apropriada. Veja os datasets `data(medicao)` e `data(remedicao)`.
 #'
 #' @export
+#' @importFrom rlang .data
 importar_base <- function(arq, col = 'standard', re = TRUE) {
     if(col == 'standard') {
         if(re == TRUE) {coluna <-'cciicnncccccccccciinn'} else {coluna <- 'ccicnnccccccccciinn'}
@@ -20,16 +21,16 @@ importar_base <- function(arq, col = 'standard', re = TRUE) {
     if(re == TRUE) {
         df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,  # Elimina linhas em branco
-                        col_types = coluna) %>% dplyr::filter(!is.na(bloco)) %>%  # Também elimina linhas em branco
-            dplyr::mutate(cap = ifelse(cap == '-', '0',  # Troca mortas por 0
-                                ifelse(cap == 'NE', '1',  # Troca Não encontradas por 1
-                                       ifelse(cap == 'NM', '2', cap))),  # Troca não medidas por 2
-                   cap_ant = ifelse(cap_ant == '-', '0',  # Mesma coisa para o cap anterior
-                                    ifelse(cap_ant == 'NE', '1',
-                                           ifelse(cap_ant == 'NM', '2', cap_ant))),
-                   id = paste0(bloco, '.', faixa, '/', ind, bif),  # Cria código para a árvore
-                   id_ant = ifelse(is.na(ind_ant), NA,  # Cria código antigo para a árvore, se houver
-                                   paste0(bloco, '.', faixa, '/', ind_ant, bif))
+                        col_types = coluna) %>% dplyr::filter(!is.na(.data$bloco)) %>%  # Também elimina linhas em branco
+            dplyr::mutate(cap = ifelse(.data$cap == '-', '0',  # Troca mortas por 0
+                                ifelse(.data$cap == 'NE', '1',  # Troca Não encontradas por 1
+                                       ifelse(.data$cap == 'NM', '2', .data$cap))),  # Troca não medidas por 2
+                   cap_ant = ifelse(.data$cap_ant == '-', '0',  # Mesma coisa para o cap anterior
+                                    ifelse(.data$cap_ant == 'NE', '1',
+                                           ifelse(.data$cap_ant == 'NM', '2', .data$cap_ant))),
+                   id = paste0(.data$bloco, '.', .data$faixa, '/', .data$ind, .data$bif),  # Cria código para a árvore
+                   id_ant = ifelse(is.na(.data$ind_ant), NA,  # Cria código antigo para a árvore, se houver
+                                   paste0(.data$bloco, '.', .data$faixa, '/', .data$ind_ant, .data$bif))
             )
 
         # 0 = '-' ; 1 = 'NE' (Não encontrada) ; 1 = NM (Não medida, por risco alto, etc.)
@@ -40,11 +41,11 @@ importar_base <- function(arq, col = 'standard', re = TRUE) {
     } else {
         df <- readr::read_csv2(arq,
                         skip_empty_rows = TRUE,
-                        col_types = coluna) %>% dplyr::filter(!is.na(bloco)) %>%
-            dplyr::mutate(cap = ifelse(cap == '-', '0',
-                                ifelse(cap == 'NE', '1',
-                                       ifelse(cap == 'NM', '2', cap))),
-                   id = paste0(bloco, '.', faixa, '/', ind, bif))
+                        col_types = coluna) %>% dplyr::filter(!is.na(.data$bloco)) %>%
+            dplyr::mutate(cap = ifelse(.data$cap == '-', '0',
+                                ifelse(.data$cap == 'NE', '1',
+                                       ifelse(.data$cap == 'NM', '2', .data$cap))),
+                   id = paste0(.data$bloco, '.', .data$faixa, '/', .data$ind, .data$bif))
 
         # 0 = '-' ; 1 = 'NE' (Não encontrada) ; 1 = NM (Não medida, por risco alto, etc.)
 

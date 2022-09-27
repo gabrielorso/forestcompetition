@@ -23,32 +23,32 @@ juncao_composta <- function(m_composto, m_inicial, ano_inicial) {
     if('cap_ant' %in% names(m_inicial)) {
 
         foo2 <- m_inicial %>%
-            dplyr::select(id, cient, cap_ant, cap, fuste, estrato, fito, copa)
+            dplyr::select(.data$id, .data$cient, .data$cap_ant, .data$cap, .data$fuste, .data$estrato, .data$fito, .data$copa)
 
         juntar <- dplyr::left_join(foo1, foo2, by = 'id', suffix = c('', '_ini')) %>%
             dplyr::left_join(foo2, by = c('id_ant' = 'id'), suffix = c('', '_ini2')) %>%
-            dplyr::mutate(cient_ini = ifelse(!is.na(cient_ini2), cient_ini2, cient_ini),
-                   cap_ant_ini = ifelse(!is.na(cap_ant_ini2), cap_ant_ini2, cap_ant_ini),
-                   cap_ini = ifelse(!is.na(cap_ini2), cap_ini2, cap_ini),
-                   fuste_ini = ifelse(!is.na(fuste_ini2), fuste_ini2, fuste_ini),
-                   estrato_ini = ifelse(!is.na(estrato_ini2), estrato_ini2, estrato_ini),
-                   fito_ini = ifelse(!is.na(fito_ini2), fito_ini2, fito_ini),
-                   copa_ini = ifelse(!is.na(copa_ini2), copa_ini2, copa_ini),
+            dplyr::mutate(cient_ini = ifelse(!is.na(.data$cient_ini2), .data$cient_ini2, .data$cient_ini),
+                   cap_ant_ini = ifelse(!is.na(.data$cap_ant_ini2), .data$cap_ant_ini2, .data$cap_ant_ini),
+                   cap_ini = ifelse(!is.na(.data$cap_ini2), .data$cap_ini2, .data$cap_ini),
+                   fuste_ini = ifelse(!is.na(.data$fuste_ini2), .data$fuste_ini2, .data$fuste_ini),
+                   estrato_ini = ifelse(!is.na(.data$estrato_ini2), .data$estrato_ini2, .data$estrato_ini),
+                   fito_ini = ifelse(!is.na(.data$fito_ini2), .data$fito_ini2, .data$fito_ini),
+                   copa_ini = ifelse(!is.na(.data$copa_ini2), .data$copa_ini2, .data$copa_ini),
             ) %>% dplyr::select(-tidyselect::ends_with('_ini2')) %>%
             dplyr::rename_with(~gsub('_ini', ano_inicial, .x), tidyselect::ends_with('_ini'))
     } else {
 
         foo2 <- m_inicial %>%
-            dplyr::select(id, cient, cap, fuste, estrato, fito, copa)
+            dplyr::select(.data$id, .data$cient, .data$cap, .data$fuste, .data$estrato, .data$fito, .data$copa)
 
         juntar <- dplyr::left_join(foo1, foo2, by = 'id', suffix = c('', '_ini')) %>%
             dplyr::left_join(foo2, by = c('id_ant' = 'id'), suffix = c('', '_ini2')) %>%
-            dplyr::mutate(cient_ini = ifelse(!is.na(cient_ini2), cient_ini2, cient_ini),
-                   cap_ini = ifelse(!is.na(cap_ini2), cap_ini2, cap_ini),
-                   fuste_ini = ifelse(!is.na(fuste_ini2), fuste_ini2, fuste_ini),
-                   estrato_ini = ifelse(!is.na(estrato_ini2), estrato_ini2, estrato_ini),
-                   fito_ini = ifelse(!is.na(fito_ini2), fito_ini2, fito_ini),
-                   copa_ini = ifelse(!is.na(copa_ini2), copa_ini2, copa_ini),
+            dplyr::mutate(cient_ini = ifelse(!is.na(.data$cient_ini2), .data$cient_ini2, .data$cient_ini),
+                   cap_ini = ifelse(!is.na(.data$cap_ini2), .data$cap_ini2, .data$cap_ini),
+                   fuste_ini = ifelse(!is.na(.data$fuste_ini2), .data$fuste_ini2, .data$fuste_ini),
+                   estrato_ini = ifelse(!is.na(.data$estrato_ini2), .data$estrato_ini2, .data$estrato_ini),
+                   fito_ini = ifelse(!is.na(.data$fito_ini2), .data$fito_ini2, .data$fito_ini),
+                   copa_ini = ifelse(!is.na(.data$copa_ini2), .data$copa_ini2, .data$copa_ini),
             ) %>% dplyr::select(-tidyselect::ends_with('_ini2')) %>%
             dplyr::rename_with(~gsub('_ini', ano_inicial, .x), tidyselect::ends_with('_ini'))
     }
