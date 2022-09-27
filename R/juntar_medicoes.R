@@ -1,4 +1,3 @@
-# cap_ant_ini <- cap_ant_ini2 <- cap_ini <- cap_ini2 <- cient <- cient_ini <- cient_ini2 <- copa <- copa_ini <- copa_ini2 <- estrato <- estrato_ini <- estrato_ini2 <- fito <- fito_ini <- fito_ini2 <- fuste <- fuste_ini <- fuste_ini2 <- id <- id_ant <- x <- y <- NULL
 
 #' Juntar Medições de inventários sucessivos
 #'

@@ -4,7 +4,7 @@
 \alias{vizinhas_iguais}
 \title{Cálculo de árvores vizinhas da mesma espécie}
 \usage{
-vizinhas_iguais(df, alvo, n.vizinhas, bif = FALSE, simplify = TRUE)
+vizinhas_iguais(df, alvo, n.vizinhas, list.viz, bif = FALSE, simplify = TRUE)
 }
 \arguments{
 \item{df}{data.frame do banco de dados utilizado}
@@ -12,6 +12,8 @@ vizinhas_iguais(df, alvo, n.vizinhas, bif = FALSE, simplify = TRUE)
 \item{alvo}{índice da árvore alvo dentro do banco de dados}
 
 \item{n.vizinhas}{vetor numérico de um elemento, com o número de árvores vizinhas consideradas.}
+
+\item{list.viz}{lista com as árvores vizinhas. Objeto retornado de \code{st_nn()}.}
 
 \item{bif}{TRUE/FALSE que indica se as bifurcações serão levadas em conta. Padrão é FALSE}
 

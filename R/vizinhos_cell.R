@@ -4,7 +4,7 @@ camada_sf <- dados_sf <- camada_sf <- camada <- NULL
 #'
 #' Encontra e calcula a distancia das arvores vizinhas, dado um ponto de uma calula raster.
 #'
-#' @param celula namero da calula do da camada raster
+#' @param celula namero da celula do da camada raster
 #' @param camada_inferior camada do tipo sf de onde serao retiradas as calulas
 #' @param camada_superior camada do tipo sf de onde virao os pontos que se deseja saber a distancia
 #' @param camada_raster camada do tipo raster que fornece as coordenadas das calulas
