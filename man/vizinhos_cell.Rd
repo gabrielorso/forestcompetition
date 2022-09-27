@@ -13,7 +13,7 @@ vizinhos_cell(
 )
 }
 \arguments{
-\item{celula}{namero da calula do da camada raster}
+\item{celula}{namero da celula do da camada raster}
 
 \item{camada_inferior}{camada do tipo sf de onde serao retiradas as calulas}
 

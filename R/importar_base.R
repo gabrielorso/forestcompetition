@@ -1,4 +1,3 @@
-# bloco <- cap <- cap_ant <- faixa <- ind <- bif <- ind_ant <- NULL
 
 
 #' Importar base de dados
